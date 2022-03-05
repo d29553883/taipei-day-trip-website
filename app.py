@@ -12,8 +12,8 @@ app.secret_key="asdgewrwjghjyrirjj"
 
 mydb = mysql.connector.connect(
   host="localhost",
-  user="",
-  password="123456",
+  user="root",
+  password="",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -150,3 +150,4 @@ def searchid(attractionId):
 
 
 app.run(host='0.0.0.0',port=3000)
+
