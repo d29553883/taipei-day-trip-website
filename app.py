@@ -12,8 +12,8 @@ app.secret_key="asdgewrwjghjyrirjj"
 
 mydb = mysql.connector.connect(
   host="localhost",
-  user="root",
-  password="",
+  user="",
+  password="123456",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -69,7 +69,7 @@ def api_1():
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
-		adr = (keyword,0,12)
+		adr = ('%'+keyword+'%',0,12)
 		nextPage = page+1
 		mycursor.execute(sql,adr)
 		myresult = mycursor.fetchall()

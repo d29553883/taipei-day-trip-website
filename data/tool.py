@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="",
+  password="123456",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -21,5 +21,5 @@ with open('taipei-attractions.json', 'r',encoding="utf-8") as f:
         x = x.split(',')
         img = [c for c in x if 'jpg' or 'JPG' in c ]
         print(img)
-        mycursor.execute("INSERT INTO attractions(id, name, category, description, address, transport, mrt, latitude, longitude, images) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(i["_id"], i["stitle"], i["CAT2"], i["xbody"], i["address"], i["info"], i["MRT"], float(i["latitude"]), float(i["longitude"]), json.dumps(img)))
+        mycursor.execute("INSERT INTO attractions2(id, name, category, description, address, transport, mrt, latitude, longitude, images) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(i["_id"], i["stitle"], i["CAT2"], i["xbody"], i["address"], i["info"], i["MRT"], float(i["latitude"]), float(i["longitude"]), json.dumps(img)))
         mydb.commit()
