@@ -69,7 +69,7 @@ def api_1():
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
-		adr = ('%'+keyword+'%',0,12)
+		adr = ('%'+keyword+'%',page_index,12)
 		nextPage = page+1
 		mycursor.execute(sql,adr)
 		myresult = mycursor.fetchall()
@@ -150,4 +150,5 @@ def searchid(attractionId):
 
 
 app.run(host='0.0.0.0',port=3000)
+
 
