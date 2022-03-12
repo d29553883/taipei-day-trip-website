@@ -1,9 +1,13 @@
 from flask import *
+from flask_cors import CORS
 import mysql.connector
 import decimal
 import ast
 
+from sqlalchemy import true
+
 app=Flask(__name__)
+CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -13,7 +17,7 @@ app.secret_key="asdgewrwjghjyrirjj"
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="",
+  password="123456",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -64,6 +68,8 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
+		# response = make_response(jsonify(y))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
 	elif page != None and keyword != None:
 		page = int(page)
@@ -89,6 +95,9 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
+
+		# response = make_response(jsonify(y))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
 
 
@@ -98,6 +107,8 @@ def api_1():
 			"error": bool(a),
 			"message":"page沒輸入"
 		}
+		# response = make_response(jsonify(x))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(x)
 
 @app.route("/api/attraction/<attractionId>")
@@ -149,6 +160,7 @@ def searchid(attractionId):
 
 
 
-app.run(host='0.0.0.0',port=3000)
+# app.run(host='0.0.0.0',port=3000)
+app.run(port=3000,debug=true)
 
 

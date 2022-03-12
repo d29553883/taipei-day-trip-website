@@ -1,0 +1,289 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans TC";
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 1200px;
+  height: 54px;
+}
+.maintitle {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.7rem;
+  color: #448899;
+  position: absolute;
+  left: 360px;
+}
+nav {
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+  flex: auto;
+}
+
+input {
+  width: 400px;
+  height: 42px;
+  /* -webkit-border-radius: 15px 10px; */
+  border-radius: 5px 0 0 5px;
+}
+a {
+  text-decoration: none;
+  color: #666666;
+}
+.a1 {
+  margin: 1rem;
+}
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  margin-bottom: 55px;
+  background-color: skyblue;
+  position: relative;
+}
+#welcome_img {
+  position: absolute;
+  right: 232px;
+}
+.welcome_left {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 15px;
+  width: 1200px;
+  max-width: 1200px;
+  color: #f8f8f8;
+  position: absolute;
+  left: 370px;
+  /* grid-template-columns: 370px auto; */
+}
+.control {
+  display: flex;
+  width: 500px;
+  height: 1px;
+  background-color: #2f158f;
+}
+.text1 {
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+.text2 {
+  font-size: 0.5rem;
+}
+::placeholder {
+  color: #757575;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  padding-left: 15px;
+}
+
+.search {
+  display: flex;
+}
+
+.warp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.item {
+  flex: none;
+  width: 270px;
+  height: 242px;
+  background-color: #ffffff;
+  margin: 10px;
+  position: relative;
+  border-radius: 2px;
+  outline: 1px solid #e8e8e8;
+}
+.p_container {
+  flex: none;
+  width: 270px;
+  object-fit: fill;
+  position: relative;
+}
+.item img {
+  width: 270px;
+  object-fit: cover;
+}
+.name_container {
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+  position: absolute;
+  bottom: 0;
+}
+.pictext {
+  width: 100%;
+  height: 40px;
+  margin: 10px;
+  text-align: start;
+  color: #757575;
+  font-size: 16px;
+}
+.mrt_text {
+  margin: 10px;
+  width: 125px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #757575;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.category_text {
+  margin: 10px;
+  width: 125px;
+  font-size: 16px;
+  text-align: right;
+  background-color: #ffffff;
+  color: #757575;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.cover {
+  object-fit: cover;
+  height: 202px;
+}
+.s1 {
+  display: flex;
+  align-items: center;
+}
+.btn2 {
+  display: flex;
+  background: none;
+  margin-top: 1px;
+}
+
+.error {
+  display: flex;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 104px;
+  margin-top: 55px;
+  justify-content: space-around;
+  color: #ffffff;
+  font-size: 16px;
+  background-color: #757575;
+}
+@media screen and (max-width: 1200px) {
+  .welcome_left {
+    position: absolute;
+    left: 100px;
+  }
+  .maintitle {
+    position: absolute;
+    left: 100px;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  nav {
+    position: absolute;
+    right: 1rem;
+  }
+  .item {
+    width: 45%;
+    height: 280px;
+  }
+  .item img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .p_container {
+    flex: none;
+    width: 100%;
+    object-fit: fill;
+    position: relative;
+  }
+  .pictext {
+    width: 100%;
+  }
+  .cover {
+    object-fit: cover;
+    height: 242px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .welcome {
+    position: relative;
+  }
+  .welcome_left {
+    position: absolute;
+    left: 20px;
+  }
+
+  #welcome_img {
+    position: absolute;
+    max-height: 67%;
+    max-width: 67%;
+    left: 148px;
+    bottom: 0;
+  }
+  input {
+    width: 230px;
+    height: 42px;
+    /* -webkit-border-radius: 15px 10px; */
+    border-radius: 5px;
+  }
+  .item {
+    width: 90%;
+    height: 280px;
+  }
+  .item img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .p_container {
+    flex: none;
+    width: 100%;
+    object-fit: fill;
+    position: relative;
+  }
+  .maintitle {
+    position: absolute;
+    left: 0.5rem;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .cover {
+    object-fit: cover;
+    height: 242px;
+  }
+
+  nav {
+    position: absolute;
+    right: 0.5rem;
+  }
+  a {
+    font-size: 16px;
+  }
+  .text1 {
+    font-weight: bold;
+    font-size: 28px;
+  }
+  .text2 {
+    font-size: 16px;
+  }
+}
