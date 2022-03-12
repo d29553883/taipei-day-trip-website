@@ -45,7 +45,7 @@ def thankyou():
 def api_1():
 	page = request.args.get("page")
 	keyword = request.args.get("keyword")
-	if page != None and keyword == None:	
+	if page != '' and keyword == None:	
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions ORDER BY id LIMIT %s, %s"
@@ -71,7 +71,7 @@ def api_1():
 		# response = make_response(jsonify(y))
 		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
-	elif page != None and keyword != None:
+	elif page != '' and keyword != None:
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
@@ -160,7 +160,7 @@ def searchid(attractionId):
 
 
 
-# app.run(host='0.0.0.0',port=3000)
-app.run(port=3000,debug=true)
+app.run(host='0.0.0.0',port=3000)
+# app.run(port=3000,debug=true)
 
 
