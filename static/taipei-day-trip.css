@@ -48,7 +48,8 @@ a {
   align-items: center;
   height: 320px;
   margin-bottom: 55px;
-  background-color: skyblue;
+  background-image: linear-gradient(to right bottom, #aaddee, #66aabb);
+  /* background-color: skyblue; */
   position: relative;
 }
 #welcome_img {
@@ -254,7 +255,7 @@ footer {
     width: 230px;
     height: 42px;
     /* -webkit-border-radius: 15px 10px; */
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
   }
   .item {
     width: 90%;
@@ -295,5 +296,10 @@ footer {
   }
   .text2 {
     font-size: 16px;
+  }
+  .btn2 {
+    display: flex;
+    background: none;
+    margin-bottom: 1px;
   }
 }
