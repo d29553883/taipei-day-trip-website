@@ -1,4 +1,5 @@
 let Page = 0;
+let htmlStr = "";
 
 function createdata() {
   let src = "/api/attractions?page=0";
@@ -136,8 +137,8 @@ const searchBtn = document.getElementById("searchBtn");
 
 function searchdata2() {
   let ky = searchkeyword.value;
-  if (Page !== 0 && Page !== "null") {
-    observer.observe(loadingObserver);
+  if (Page !== "null") {
+    observer.unobserve(loadingObserver);
     let src = "/api/attractions?page=1" + "&keyword=" + ky;
     fetch(src)
       .then(function (response) {
@@ -149,10 +150,9 @@ function searchdata2() {
         let mrt_list = [];
         let category_list = [];
         console.log(result.data);
-
         let datas = result.data;
-        let nextpage = result.nextPage;
-        Page = nextpage;
+        // let nextpage = result.nextPage;
+        // Page = nextpage;
         for (let i in datas) {
           name_list.push(datas[i].name);
           img_list.push(datas[i].images[0]);
@@ -209,11 +209,11 @@ function searchdata() {
       return response.json();
     })
     .then(function (result) {
-      console.log(result.data);
-      if (searchkeyword.value !== "" && result.data !== []) {
+      if (searchkeyword.value !== "" && result.data.length !== 0) {
+        console.log(result.data.length);
         let datas = result.data;
-        let nextpage = result.nextPage;
-        Page = nextpage;
+        // let nextpage = result.nextPage;
+        Page = 0;
         let oldpic = document.getElementsByClassName("warp")[0];
         while (oldpic.firstChild) {
           oldpic.removeChild(oldpic.firstChild);
@@ -255,12 +255,16 @@ function searchdata() {
           divitem.appendChild(category_text);
           pic.appendChild(divitem);
         }
+        observer.observe(loadingObserver);
+        console.log(Page);
       } else {
         let oldpic = document.getElementsByClassName("warp")[0];
         while (oldpic.firstChild) {
           oldpic.removeChild(oldpic.firstChild);
         }
-        alert("查無此資料");
+        let error = document.getElementsByClassName("error")[0];
+        let noresult = document.createTextNode("查無此資料");
+        error.appendChild(noresult);
       }
     });
 }
@@ -268,4 +272,5 @@ function searchdata() {
 searchBtn.addEventListener("click", function () {
   observer.unobserve(loadingObserver);
   searchdata();
+  Page = 0;
 });

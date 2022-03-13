@@ -174,6 +174,9 @@ a {
 
 .error {
   display: flex;
+  justify-content: center;
+  font-size: 30px;
+  height: 50px;
 }
 footer {
   display: flex;
@@ -196,6 +199,13 @@ footer {
     left: 100px;
     font-weight: bold;
     font-size: 30px;
+  }
+  #welcome_img {
+    position: absolute;
+    max-height: 85%;
+    max-width: 85%;
+    left: 300px;
+    bottom: 0;
   }
   nav {
     position: absolute;
@@ -235,9 +245,9 @@ footer {
 
   #welcome_img {
     position: absolute;
-    max-height: 67%;
-    max-width: 67%;
-    left: 148px;
+    max-height: 70%;
+    max-width: 70%;
+    left: 158px;
     bottom: 0;
   }
   input {
