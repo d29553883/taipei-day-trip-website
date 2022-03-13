@@ -19,26 +19,28 @@
     </header>
     <div class="welcome">
       <img id="welcome_img" src="../static/welcome 1.png" />
-      <div class="welcome_left">
-        <div class="text1">輕鬆享受台北一日悠閒</div>
-        <div class="text2">探索每個角落，體驗城市的深度旅遊行程</div>
-        <div class="search" action="/api/attractions" method="GET">
-          <div class="s1">
-            <input
-              type="text"
-              placeholder="請輸入景點名稱查詢"
-              onfocus="this.placeholder=''"
-              onblur="this.placeholder='請輸入景點名稱查詢'"
-              id="searchkeyword"
-              name="keyword"
-            />
-            <button class="btn2" id="searchBtn" style="border: none">
-              <img
-                id="b2"
-                style="width: 60px; height: 46px"
-                src="../static/btfix.png"
+      <div class="welcome_out">
+        <div class="welcome_left">
+          <div class="text1">輕鬆享受台北一日悠閒</div>
+          <div class="text2">探索每個角落，體驗城市的深度旅遊行程</div>
+          <div class="search" action="/api/attractions" method="GET">
+            <div class="s1">
+              <input
+                type="text"
+                placeholder="請輸入景點名稱查詢"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='請輸入景點名稱查詢'"
+                id="searchkeyword"
+                name="keyword"
               />
-            </button>
+              <button class="btn2" id="searchBtn" style="border: none">
+                <img
+                  id="b2"
+                  style="width: 60px; height: 46px"
+                  src="../static/btfix.png"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>

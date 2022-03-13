@@ -17,10 +17,9 @@ header {
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 30px;
   color: #448899;
-  position: absolute;
-  left: 360px;
+  margin-left: 15px;
 }
 nav {
   display: flex;
@@ -42,6 +41,7 @@ a {
 .a1 {
   margin: 1rem;
 }
+
 .welcome {
   display: flex;
   justify-content: center;
@@ -52,9 +52,19 @@ a {
   /* background-color: skyblue; */
   position: relative;
 }
+.welcome_out {
+  display: flex;
+  justify-content: center;
+  height: 169px;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  margin: auto;
+  z-index: 2;
+}
 #welcome_img {
   position: absolute;
   right: 232px;
+  z-index: 1;
 }
 .welcome_left {
   display: grid;
@@ -63,9 +73,8 @@ a {
   width: 1200px;
   max-width: 1200px;
   color: #f8f8f8;
-  position: absolute;
-  left: 370px;
-  /* grid-template-columns: 370px auto; */
+  margin-left: 25px;
+  /* grid-template-columns: 5px auto; */
 }
 .control {
   display: flex;
@@ -75,10 +84,11 @@ a {
 }
 .text1 {
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 28px;
 }
+
 .text2 {
-  font-size: 0.5rem;
+  font-size: 16px;
 }
 ::placeholder {
   color: #757575;
@@ -97,7 +107,7 @@ a {
 .warp {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 1200px;
   margin: auto;
 }
@@ -107,7 +117,7 @@ a {
   width: 270px;
   height: 242px;
   background-color: #ffffff;
-  margin: 10px;
+  margin: 15px;
   position: relative;
   border-radius: 2px;
   outline: 1px solid #e8e8e8;
@@ -191,15 +201,22 @@ footer {
   background-color: #757575;
 }
 @media screen and (max-width: 1200px) {
+  /* header {
+    display: flex;
+    margin: auto;
+  } */
   .welcome_left {
     position: absolute;
-    left: 100px;
+    margin-left: 5px;
+    left: 6px;
   }
   .maintitle {
     position: absolute;
     left: 100px;
     font-weight: bold;
     font-size: 30px;
+    margin-left: 5px;
+    left: 6px;
   }
   #welcome_img {
     position: absolute;
@@ -229,6 +246,13 @@ footer {
   .pictext {
     width: 100%;
   }
+  .text1 {
+    font-weight: bold;
+    font-size: 28px;
+  }
+  .text2 {
+    font-size: 16px;
+  }
   .cover {
     object-fit: cover;
     height: 242px;
@@ -237,11 +261,20 @@ footer {
 
 @media screen and (max-width: 600px) {
   .welcome {
-    position: relative;
+    display: flex;
+  }
+  .welcome_out {
+    display: flex;
+    justify-content: flex-start;
+    width: 360px;
+    height: 169px;
+    flex-wrap: wrap;
+    z-index: 2;
   }
   .welcome_left {
-    position: absolute;
-    left: 20px;
+    width: 360px;
+    margin-left: 5px;
+    left: 6px;
   }
 
   #welcome_img {
@@ -250,6 +283,7 @@ footer {
     max-width: 70%;
     left: 158px;
     bottom: 0;
+    z-index: 1;
   }
   input {
     width: 230px;
@@ -272,11 +306,20 @@ footer {
     position: relative;
   }
   .maintitle {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: #448899;
+    margin-left: 5px;
+    left: 6px;
+  }
+  /* .maintitle {
     position: absolute;
     left: 0.5rem;
     font-weight: bold;
     font-size: 30px;
-  }
+  } */
 
   .cover {
     object-fit: cover;
