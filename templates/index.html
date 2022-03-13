@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href={{ url_for('static',
+    filename='taipei-day-trip.css') }}/>
+  </head>
+  <body>
+    <header>
+      <div class="maintitle">台北一日遊</div>
+      <nav>
+        <a style="margin-right: 1rem" href="#">預定行程</a>
+        <a href="#">登入</a>
+        <a href="#">/註冊</a>
+      </nav>
+    </header>
+    <div class="welcome">
+      <img id="welcome_img" src="../static/welcome 1.png" />
+      <div class="welcome_out">
+        <div class="welcome_left">
+          <div class="text1">輕鬆享受台北一日悠閒</div>
+          <div class="text2">探索每個角落，體驗城市的深度旅遊行程</div>
+          <div class="search" action="/api/attractions" method="GET">
+            <div class="s1">
+              <input
+                type="text"
+                placeholder="請輸入景點名稱查詢"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='請輸入景點名稱查詢'"
+                id="searchkeyword"
+                name="keyword"
+              />
+              <button class="btn2" id="searchBtn" style="border: none">
+                <img
+                  id="b2"
+                  style="width: 60px; height: 46px"
+                  src="../static/btfix.png"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="warp"></div>
+    <div class="error" id="error"></div>
+    <footer>
+      <div class="foot">
+        <div>COPYRIGHT © 2021台北一日遊</div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="../static/index.js"></script>
+  </body>
+</html>

@@ -1,9 +1,13 @@
 from flask import *
+from flask_cors import CORS
 import mysql.connector
 import decimal
 import ast
 
+from sqlalchemy import true
+
 app=Flask(__name__)
+CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -41,7 +45,7 @@ def thankyou():
 def api_1():
 	page = request.args.get("page")
 	keyword = request.args.get("keyword")
-	if page != None and keyword == None:	
+	if page != '' and keyword == None:	
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions ORDER BY id LIMIT %s, %s"
@@ -64,8 +68,10 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
+		# response = make_response(jsonify(y))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
-	elif page != None and keyword != None:
+	elif page != '' and keyword != None:
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
@@ -89,6 +95,8 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
+		# response = make_response(jsonify(y))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
 
 
@@ -98,6 +106,8 @@ def api_1():
 			"error": bool(a),
 			"message":"page沒輸入"
 		}
+		# response = make_response(jsonify(x))
+		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(x)
 
 @app.route("/api/attraction/<attractionId>")
@@ -150,5 +160,6 @@ def searchid(attractionId):
 
 
 app.run(host='0.0.0.0',port=3000)
+# app.run(port=3000,debug=true)
 
 
