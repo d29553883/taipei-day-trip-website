@@ -95,7 +95,6 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
-
 		# response = make_response(jsonify(y))
 		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
