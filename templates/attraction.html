@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='attraction.css')
+    }}/>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="maintitle">台北一日遊</div>
+        <nav>
+          <a style="margin-right: 1rem" href="#">預定行程</a>
+          <a href="#">登入</a>
+          <a href="#">/註冊</a>
+        </nav>
+      </header>
+
+      <div class="section1">
+        <div id="pic_container">
+          <div id="tab"></div>
+          <div class="lunbo_btn">
+            <span num="0" class="tabBtn hover" id="lunbo1"></span>
+          </div>
+          <div class="arrow prve">
+            <span class="slider_left"></span>
+          </div>
+          <div class="arrow next">
+            <span class="slider_right"></span>
+          </div>
+        </div>
+        <div class="s1_right">
+          <div class="titlebox"></div>
+          <div class="title2box"></div>
+          <div class="booking">
+            <div class="b1">訂購導覽行程</div>
+            <div class="b2">以此景點為中心的一日行程，帶你探索城市角落故事</div>
+            <div class="datetbox">
+              <div class="title">選擇日期 :</div>
+              <input type="date" id="date" />
+            </div>
+            <div class="group">
+              <div class="title">選擇時間 :</div>
+              <div class="date-group">
+                <div class="r1">
+                  <input
+                    type="radio"
+                    class="radio-input"
+                    id="1"
+                    name="number"
+                    value="新台幣 2000元"
+                    checked
+                  />
+                  <label for="1" class="radio-label">
+                    <span class="radio-button"></span>
+                    上半天
+                  </label>
+                </div>
+              </div>
+              <div class="date-group">
+                <div class="r2">
+                  <input
+                    type="radio"
+                    class="radio-input"
+                    id="2"
+                    name="number"
+                    value="新台幣 2500元"
+                  />
+                  <label for="2" class="radio-label">
+                    <span class="radio-button"></span>
+                    下半天
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="cost">
+              <div class="title">導覽費用 :</div>
+              <div class="costelement"></div>
+            </div>
+            <button class="bookBtn">
+              <tag class="bookBtntext">開始預訂行程</tag>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="section2">
+        <div class="contentbox"></div>
+        <div class="address_title">景點地址 :</div>
+        <div class="address"></div>
+        <div class="transport_title">交通方式 :</div>
+        <div class="transport"></div>
+      </div>
+
+      <footer>
+        <div class="foot">
+          <div>COPYRIGHT © 2021台北一日遊</div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../static/attraction.js"></script>
+  </body>
+</html>
