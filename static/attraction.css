@@ -79,6 +79,7 @@ a {
   border-radius: 3px;
   font-size: 16px;
   color: #666666;
+  overflow: hidden;
 }
 .b1 {
   display: flex;
