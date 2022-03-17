@@ -1,6 +1,6 @@
 function singlepage() {
   id = String(window.location.href);
-  id = id.substr(-1, 1);
+  id = id.substr(-2, 2);
   let src = "/api/attraction/" + id;
   fetch(src)
     .then(function (response) {
@@ -8,6 +8,7 @@ function singlepage() {
     })
     .then(function (result) {
       let data = result.data;
+      console.log(result);
       let titlebox = document.getElementsByClassName("titlebox")[0];
       let title = document.createTextNode(data.name);
       let title2box = document.getElementsByClassName("title2box")[0];
