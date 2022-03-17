@@ -67,17 +67,6 @@ Total_Obj[1].onclick = function () {
 
 var curIndex = 0; //初始化
 
-window.onload = function () {
-  //為按鈕初始化onclick事件
-  var tbs = document.getElementsByClassName("tabBtn");
-  for (var i = 0; i < tbs.length; i++) {
-    tbs[i].onclick = function () {
-      slideTo(this.attributes["num"].value);
-      curIndex = this.attributes["num"].value;
-    };
-  }
-};
-
 var prve = document.getElementsByClassName("prve");
 prve[0].onclick = function () {
   var img_number = document.getElementsByClassName("tabImg").length;
