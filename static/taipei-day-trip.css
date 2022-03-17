@@ -57,6 +57,7 @@ a {
   background-image: linear-gradient(to right bottom, #aaddee, #66aabb);
   /* background-color: skyblue; */
   position: relative;
+  overflow: hidden;
 }
 .welcome_out {
   display: flex;
