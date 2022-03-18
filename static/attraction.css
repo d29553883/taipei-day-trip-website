@@ -375,11 +375,24 @@ footer {
 
   .s1_right {
     display: flex;
-    width: 95%;
-    justify-content: center;
+    width: 100%;
+    justify-content: flex-start;
     height: 350px;
     margin: 20px 10px 20px 10px;
     flex-wrap: wrap;
+  }
+
+  .titlebox {
+    display: flex;
+    width: 100%;
+    height: 33px;
+    margin: 0px 15px 5px 5px;
+  }
+  .title2box {
+    display: flex;
+    width: 100%;
+    height: 22px;
+    margin: 10px 10px 10px 5px;
   }
   .b2 {
     display: flex;
