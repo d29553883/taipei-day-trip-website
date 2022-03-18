@@ -301,7 +301,7 @@ a {
 .contentbox {
   display: flex;
   width: 1180px;
-  margin: 0px 0px 20px 0px;
+  margin: 50px 0px 20px 0px;
 }
 .address_title {
   display: flex;
