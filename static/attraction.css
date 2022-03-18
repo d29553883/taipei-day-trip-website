@@ -349,14 +349,6 @@ footer {
     margin-bottom: 40px;
   }
 
-  #pic_container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 406px;
-    position: relative;
-    margin: 37px 15px 37px 15px;
-  }
   .tabImg {
     display: flex;
     width: 100%;
@@ -380,6 +372,12 @@ footer {
     height: 350px;
     margin: 20px 10px 20px 10px;
     flex-wrap: wrap;
+  }
+  .prve {
+    margin-left: 10px;
+  }
+  .next {
+    margin-right: 10px;
   }
 
   .titlebox {
@@ -412,17 +410,20 @@ footer {
 
   #pic_container {
     display: flex;
-    width: 100%;
-    height: 350px;
-    position: relative;
+    height: 406px;
+    width: 540px;
+    justify-content: center;
+    /* position: relative; */
     margin: 37px 0px 20px 0px;
+    margin: auto;
   }
 
   .tabImg {
     flex: none;
     width: 100%;
-    height: 350px;
+    height: 406px;
     object-fit: cover;
+    position: relative;
   }
 
   .contentbox {
@@ -503,7 +504,6 @@ footer {
     flex-direction: column;
     height: 302px;
     margin: 10px 5px 10px 5px;
-    flex: 1;
     width: 100%;
     word-break: break-all;
   }
@@ -555,6 +555,16 @@ footer {
     margin-bottom: -50px;
     margin-left: 10px;
   }
+
+  .prve {
+    position: absolute;
+    margin-left: 10px;
+  }
+  .next {
+    position: absolute;
+    margin-right: 10px;
+  }
+
   .line {
     width: 100%;
   }
