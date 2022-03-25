@@ -26,18 +26,31 @@ header {
   font-size: 30px;
   color: #448899;
   margin-left: 15px;
+  cursor: pointer;
 }
-nav {
+.nav_text {
   display: flex;
   list-style-type: none;
   justify-content: flex-end;
   flex: auto;
 }
-
-a {
+#reservation_button {
   text-decoration: none;
   color: #666666;
 }
+
+#login_button {
+  text-decoration: none;
+  color: #666666;
+  display: flex;
+}
+#logout_button {
+  text-decoration: none;
+  color: #666666;
+  display: none;
+  cursor: pointer;
+}
+
 .section1 {
   display: flex;
   max-width: 1200px;
@@ -335,7 +348,153 @@ footer {
   font-size: 16px;
   background-color: #757575;
 }
+.successlogin {
+  display: flex;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
 
+.popup_signup {
+  background: rgb(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  z-index: 20;
+  justify-content: center;
+}
+.popup {
+  background: rgb(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  z-index: 20;
+  justify-content: center;
+}
+.popup-content {
+  margin-top: 80px;
+  width: 340px;
+  height: 280px;
+  max-height: 325px;
+  background: #ffffff;
+  border-radius: 5px;
+  position: relative;
+}
+.popup-content2 {
+  margin-top: 80px;
+  width: 340px;
+  height: 332px;
+  max-height: 370px;
+  background: #ffffff;
+  border-radius: 5px;
+  position: relative;
+}
+.top-line {
+  height: 10px;
+  background-image: linear-gradient(to right, #66aabb, #337788);
+  border-radius: 5px 5px 0px 0px;
+}
+.popup-title {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  margin: 15px 15px 10px 15px;
+  font-weight: bold;
+  color: #666666;
+}
+.login_input {
+  margin: 5px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  width: 276px;
+  height: 13px;
+  outline-style: none;
+  border-radius: 4px;
+  padding: 15px;
+  border: 0.5px solid Gray 500;
+}
+
+.siginup_text {
+  display: flex;
+  background-color: #448899;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 310px;
+  height: 47px;
+  margin: 5px 15px;
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+}
+.login_text {
+  display: flex;
+  background-color: #448899;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 310px;
+  height: 47px;
+  margin: 5px 15px;
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+}
+.close {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  cursor: pointer;
+}
+.close2 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  cursor: pointer;
+}
+.no_account {
+  display: flex;
+  font-size: 16px;
+  width: 310px;
+  height: 22px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 15px;
+  color: #666666;
+}
+.have_account {
+  display: flex;
+  font-size: 16px;
+  width: 310px;
+  height: 22px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 15px;
+  color: #666666;
+}
+.loginerror {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+#switch_sinup {
+  color: #666666;
+  text-decoration: none;
+}
+#switch_login {
+  color: #666666;
+  text-decoration: none;
+}
 @media screen and (max-width: 1200px) {
   footer {
     width: 100%;
@@ -346,6 +505,7 @@ footer {
     display: flex;
     width: 100%;
     height: 100%;
+    margin-top: 37px;
     margin-bottom: 40px;
   }
 
@@ -413,7 +573,6 @@ footer {
     height: 406px;
     width: 540px;
     justify-content: center;
-    /* position: relative; */
     margin: 37px 0px 20px 0px;
     margin: auto;
   }
