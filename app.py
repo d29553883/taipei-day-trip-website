@@ -150,11 +150,11 @@ def memberinfo():
 				"name":session['name'],
 				"email":session['e_mail']
 			}
-		})
+		}),200	
 	else:
 		return jsonify({
 			"data": None
-		})		
+		}),200		
 
 	
 	
