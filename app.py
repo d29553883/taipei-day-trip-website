@@ -18,7 +18,7 @@ app.secret_key="asdgewrwjghjyrirjj"
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="",
+  password="123456",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -202,13 +202,11 @@ def signin():
 		adr = (e_mail,passWord, )
 		mycursor.execute(sql, adr)
 		myresult = mycursor.fetchall()
-		print(myresult)
 		if myresult != []:
 			sql2 = "SELECT id,name,email FROM member2 WHERE email = %s"
 			adr2 = (e_mail,)
 			mycursor.execute(sql2, adr2)
 			myresult = mycursor.fetchall()
-			print(myresult)
 			x = myresult[0]
 			x.__str__()
 			session['id']= int(x[0])
@@ -235,7 +233,6 @@ def signout():
 	del session['id']
 	del session['name']
 	del session['e_mail']
-	print("登出成功")
 	return jsonify({
 		"ok": True
 	})
@@ -244,8 +241,8 @@ def signout():
 
 
 
-app.run(host='0.0.0.0',port=3000)
-# app.run(port=3000,debug=true)
+# app.run(host='0.0.0.0',port=3000)
+app.run(port=3000,debug=true)
 
 
 
