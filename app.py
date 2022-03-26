@@ -3,6 +3,7 @@ from flask_cors import CORS
 import mysql.connector
 import decimal
 import ast
+import json
 
 from sqlalchemy import true
 
@@ -49,8 +50,7 @@ def api_1():
 		page = int(page)
 		page_index = page*12
 		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions ORDER BY id LIMIT %s, %s"
-		adr = (page_index,12)
-		
+		adr = (page_index,12)		
 		mycursor.execute(sql, adr)
 		myresult = mycursor.fetchall()
 		names = 'id name category description address transport mrt latitude longitude images'.split()
@@ -68,8 +68,6 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
-		# response = make_response(jsonify(y))
-		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
 	elif page != '' and keyword != None:
 		page = int(page)
@@ -95,19 +93,13 @@ def api_1():
 			"nextPage":nextPage,
 			"data":data
 		}
-		# response = make_response(jsonify(y))
-		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(y)
-
-
 	else:
 		a = 1
 		x = {
 			"error": bool(a),
 			"message":"page沒輸入"
 		}
-		# response = make_response(jsonify(x))
-		# response.headers["access-control-allow-origin"]="*";
 		return jsonify(x)
 
 @app.route("/api/attraction/<attractionId>")
@@ -146,20 +138,113 @@ def searchid(attractionId):
 		}
 		return jsonify(x)
 
-	
+
+
+@app.route("/api/user")
+def memberinfo():
+	if session != {}:
+		print(session)
+		return jsonify({
+			"data":{
+				"id":session['id'],
+				"name":session['name'],
+				"email":session['e_mail']
+			}
+		}),200	
+	else:
+		return jsonify({
+			"data": None
+		}),200		
 
 	
-
-
-
 	
 
-	
+@app.route("/api/user", methods=["POST"])
+def signup():
+	try:
+		req = request.get_json()
+		e_mail = req["email"]
+		sql = "SELECT email FROM member2 WHERE email = %s"
+		adr = (e_mail, )
+		mycursor.execute(sql, adr)
+		myresult = mycursor.fetchall()
+		if myresult != [] :
+			response= make_response(jsonify({
+				"error": True,
+				"message": "此email已存在"
+			}),400)
+
+			return response
+
+		else:
+			Name = req["name"]
+			e_mail = req["email"]
+			passWord = req["password"]
+			mycursor.execute("INSERT INTO member2(name, email, password) VALUES(%s, %s, %s)",(Name, e_mail, passWord))
+			mydb.commit()
+			return jsonify({
+				"ok": True
+			})
+	except:
+		return jsonify({
+			"error": True,
+			"message": "伺服器崩潰"
+		}),500
+
+		
+@app.route("/api/user", methods=["PATCH"])
+def signin():
+	try:
+		req = request.get_json()
+		e_mail = req["email"]
+		passWord = req["password"]
+		sql = "SELECT email,password FROM member2 WHERE email = %s AND password = %s"
+		adr = (e_mail,passWord, )
+		mycursor.execute(sql, adr)
+		myresult = mycursor.fetchall()
+		if myresult != []:
+			sql2 = "SELECT id,name,email FROM member2 WHERE email = %s"
+			adr2 = (e_mail,)
+			mycursor.execute(sql2, adr2)
+			myresult = mycursor.fetchall()
+			x = myresult[0]
+			x.__str__()
+			session['id']= int(x[0])
+			session["name"]= x[1]
+			session["e_mail"]= x[2]
+			return jsonify({
+				"ok": True
+			})
+		else:
+			return jsonify({
+				"error": True,
+				"message": "帳號或密碼錯誤"
+			}),400
+	except:
+		return jsonify({
+			"error": True,
+			"message": "伺服器內部錯誤"
+		}),500
+
+
+
+@app.route("/api/user", methods=["DELETE"])
+def signout():
+	del session['id']
+	del session['name']
+	del session['e_mail']
+	return jsonify({
+		"ok": True
+	})
+
 
 
 
 
 app.run(host='0.0.0.0',port=3000)
 # app.run(port=3000,debug=true)
+
+
+
 
 

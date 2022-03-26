@@ -287,9 +287,23 @@ function searchdata() {
     });
 }
 
-// function clickpic() {
+function memberstatus() {
+  fetch("/api/user", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data !== null) {
+        document.getElementById("logout_button").style.display = "flex";
+        document.getElementById("login_button").style.display = "none";
+      } else {
+        document.getElementById("logout_button").style.display = "none";
+        document.getElementById("login_button").style.display = "flex";
+      }
+    });
+}
+memberstatus();
 
-// }
 searchBtn.addEventListener("click", function () {
   observer.unobserve(loadingObserver);
   searchdata();

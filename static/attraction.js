@@ -8,7 +8,6 @@ function singlepage() {
     })
     .then(function (result) {
       let data = result.data;
-      console.log(result);
       let titlebox = document.getElementsByClassName("titlebox")[0];
       let title = document.createTextNode(data.name);
       let title2box = document.getElementsByClassName("title2box")[0];
@@ -43,12 +42,28 @@ function singlepage() {
         tabBtn.num = num;
         tabBtn.className = "tabBtn";
         lunbo_btn.appendChild(tabBtn);
-        console.log(tabBtn.num);
       }
     });
 }
 
 singlepage();
+
+function memberstatus() {
+  fetch("/api/user", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data !== null) {
+        document.getElementById("logout_button").style.display = "flex";
+        document.getElementById("login_button").style.display = "none";
+      } else {
+        document.getElementById("logout_button").style.display = "none";
+        document.getElementById("login_button").style.display = "flex";
+      }
+    });
+}
+memberstatus();
 
 var Total_Obj = document.getElementsByClassName("radio-input");
 let costelement = document.getElementsByClassName("costelement")[0];
