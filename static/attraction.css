@@ -37,12 +37,14 @@ header {
 #reservation_button {
   text-decoration: none;
   color: #666666;
+  cursor: pointer;
 }
 
 #login_button {
   text-decoration: none;
   color: #666666;
   display: flex;
+  cursor: pointer;
 }
 #logout_button {
   text-decoration: none;
@@ -93,6 +95,12 @@ header {
   font-size: 16px;
   color: #666666;
   overflow: hidden;
+}
+
+#remindbox{
+  display: flex;
+  margin-left: 20px;
+  color: #ff4128;
 }
 .b1 {
   display: flex;
@@ -194,7 +202,7 @@ header {
   height: 22px;
   margin: 0px 20px 15px 20px;
 }
-.bookBtn {
+#bookBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,8 +214,9 @@ header {
   color: #ffffff;
   background-color: #448899;
   border-radius: 4px;
+  cursor: pointer;
 }
-.bookBtntext {
+#bookBtntext {
   margin-bottom: 3px;
 }
 #pic_container {
@@ -360,7 +369,7 @@ footer {
   background: rgb(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: none;
   z-index: 20;
@@ -370,7 +379,7 @@ footer {
   background: rgb(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: none;
   z-index: 20;
@@ -492,10 +501,12 @@ footer {
 #switch_sinup {
   color: #666666;
   text-decoration: none;
+  cursor: pointer;
 }
 #switch_login {
   color: #666666;
   text-decoration: none;
+  cursor: pointer;
 }
 @media screen and (max-width: 1200px) {
   footer {
