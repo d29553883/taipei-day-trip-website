@@ -131,3 +131,78 @@ function slideTo(index) {
     }
   }
 }
+
+function createinfo() {
+  currentid = String(window.location.href);
+  currentid = currentid.substr(-2, 2);
+  currentid = currentid.replace("/", "");
+  currentid = Number(currentid);
+  cost = document.getElementsByClassName("costelement")[0].innerText;
+  dateValue = document.getElementById("date").value;
+  morning = document.getElementById("1").checked;
+  let data = {
+    id: currentid,
+    price: cost,
+    date: dateValue,
+    morningVlue: morning,
+  };
+  fetch("/api/booking", {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      location.assign("/booking");
+    });
+}
+
+document.getElementById("bookBtn").addEventListener("click", function () {
+  fetch("/api/user")
+    .then(function (response) {
+      return response.json();
+    })
+    .then((result) => {
+      let data = result.data;
+      console.log(data);
+      dateValue = document.getElementById("date").value;
+      if (data !== null) {
+        if (dateValue !== "") {
+          createinfo();
+        } else {
+          let warning = document.getElementById("warning");
+          let remindbox = document.createElement("div");
+          remindbox.id = "remindbox";
+          warning.innerHTML = "";
+          let remind = document.createTextNode("請選擇日期");
+          remind.id = "remind";
+          remindbox.appendChild(remind);
+          warning.appendChild(remindbox);
+        }
+      } else {
+        document.querySelector(".popup").style.display = "flex";
+        stop();
+      }
+    });
+});
+
+document
+  .getElementById("reservation_button")
+  .addEventListener("click", function () {
+    fetch("/api/user")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((result) => {
+        let data = result.data;
+        console.log(data);
+        if (data !== null) {
+          location.assign("/booking");
+        } else {
+          document.querySelector(".popup").style.display = "flex";
+          stop();
+        }
+      });
+  });

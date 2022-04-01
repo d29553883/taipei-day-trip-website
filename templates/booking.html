@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='booking.css')
+    }}/>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="headout">
+        <header>
+          <div class="maintitle" type="button">台北一日遊</div>
+          <nav class="nav_text">
+            <a style="margin-right: 1rem" id="reservation_button">預定行程</a>
+            <a id="login_button">登入/註冊</a>
+            <div id="logout_button" type="button">登出系統</div>
+          </nav>
+        </header>
+      </div>
+      <div class="popup">
+        <div class="popup-content">
+          <div class="top-line"></div>
+          <div class="popup-title">
+            登入會員帳號
+            <img src="../static/icon_close.svg" alt="Close" class="close" />
+          </div>
+          <form>
+            <input
+              class="login_input"
+              type="text"
+              placeholder="輸入電子郵件"
+              name="e-mail"
+              id="inputemail"
+            />
+            <input
+              class="login_input"
+              type="password"
+              placeholder="輸入密碼"
+              name="password"
+              id="inputpassword"
+            />
+            <div>
+              <button class="login_text" type="button">登入帳戶</button>
+            </div>
+          </form>
+          <div class="loginerror"></div>
+
+          <div class="no_account">
+            <span>還沒有帳戶?</span>
+            <a id="switch_sinup">點此註冊</a>
+          </div>
+        </div>
+      </div>
+      <div class="popup_signup">
+        <div class="popup-content2">
+          <div class="top-line"></div>
+          <div class="popup-title">
+            註冊會員帳號
+            <img src="../static/icon_close.svg" alt="Close" class="close2" />
+          </div>
+          <form>
+            <input
+              class="login_input"
+              type="text"
+              placeholder="輸入姓名"
+              name="name"
+              id="singupname"
+            />
+            <input
+              class="login_input"
+              type="text"
+              placeholder="輸入電子郵件"
+              name="e-mail"
+              id="singupemail"
+            />
+            <input
+              class="login_input"
+              type="password"
+              placeholder="輸入密碼"
+              name="password"
+              id="singuppassword"
+            />
+            <div>
+              <button class="siginup_text" type="button">註冊帳戶</button>
+            </div>
+          </form>
+          <div class="successlogin"></div>
+          <div class="have_account">
+            <span>已經有帳戶了?</span>
+            <a id="switch_login">點此登入</a>
+          </div>
+        </div>
+      </div>
+      <div id="stout">
+        <div id="s1_title"><a id="st"></a></div>
+      </div>
+      <div id="warp">
+        <div id="section1">
+          <div id="s1_out">
+            <div id="s1_pic_out"></div>
+            <div id="s1_text_out">
+              <div id="attraction"></div>
+              <div id="delete" type="button">
+                <img src="../static/icon_delete.svg" />
+              </div>
+              <div id="date"><a>日期 : </a></div>
+              <div id="time"><a>時間 : </a></div>
+              <div id="cost"><a>費用 : </a></div>
+              <div id="address"><a>地點 : </a></div>
+            </div>
+          </div>
+        </div>
+        <div id="line1"></div>
+        <div id="section2">
+          <div id="content">
+            <div id="info_title">你的連絡資訊</div>
+            <div>
+              聯絡姓名 :
+              <input type="text" id="name" />
+            </div>
+            <div>
+              聯絡信箱 :
+              <input type="email" id="email" />
+            </div>
+            <div>
+              手機號碼 :
+              <input type="text" id="cellphone" />
+            </div>
+            <div id="remind">
+              請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+            </div>
+          </div>
+        </div>
+        <div id="line2"></div>
+        <div id="section3">
+          <div id="content">
+            <div id="creditcard">信用卡付款資訊</div>
+            <div>
+              卡片號碼 :
+              <input type="tel" id="cardnumber" pattern="[0-9]{13,16}" />
+            </div>
+            <div>
+              過期時間 :
+              <input type="email" id="email" />
+            </div>
+            <div>
+              驗證密碼 :
+              <input type="text" id="cellphone" />
+            </div>
+          </div>
+        </div>
+        <div id="line3"></div>
+        <div id="confirm">
+          <div id="totalcost"></div>
+          <button id="confirmBtn">
+            <tag id="confirmBtntext">確認訂購並付款</tag>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot">
+        <div>COPYRIGHT © 2021台北一日遊</div>
+      </div>
+    </footer>
+    <div id="extendout">
+      <div id="extend"></div>
+    </div>
+
+    <script type="text/javascript" src="../static/booking.js"></script>
+    <script type="text/javascript" src="../static/member.js"></script>
+  </body>
+</html>
