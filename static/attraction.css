@@ -97,9 +97,16 @@ header {
   overflow: hidden;
 }
 
+#warning{
+  display: flex;
+  margin-left: 50px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 #remindbox{
   display: flex;
-  margin-left: 20px;
+  right: 100px;
   color: #ff4128;
 }
 .b1 {

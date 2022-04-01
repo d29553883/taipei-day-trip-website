@@ -172,15 +172,14 @@ document.getElementById("bookBtn").addEventListener("click", function () {
         if (dateValue !== "") {
           createinfo();
         } else {
-          let datebox = document.getElementsByClassName("datetbox")[0];
-
+          let warning = document.getElementById("warning");
           let remindbox = document.createElement("div");
           remindbox.id = "remindbox";
-          remindbox.innerHTML = "";
-          let remind = document.createTextNode("請輸入日期");
+          warning.innerHTML = "";
+          let remind = document.createTextNode("請選擇日期");
           remind.id = "remind";
           remindbox.appendChild(remind);
-          datebox.appendChild(remindbox);
+          warning.appendChild(remindbox);
         }
       } else {
         document.querySelector(".popup").style.display = "flex";
