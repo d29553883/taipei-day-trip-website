@@ -294,9 +294,9 @@ function onSubmit(event) {
           console.log(res);
           if (res.data !== "") {
             if (res.data.payment.status === 0) {
+              deleteBook();
               let orderNumber = res.data.number;
               location.assign("/thankyou?number=" + orderNumber);
-              deleteBook();
             } else {
               document.getElementById("checkinfoBox").innerHTML = "";
               let checkinfoBox = document.getElementById("checkinfoBox");

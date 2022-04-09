@@ -377,7 +377,6 @@ def createBook():
 			image = x[3]
 			date = x[4]
 			time = x[5]
-			# number = data["order_number"]
 			number = datetime.now().strftime('%Y%m%d%H%M%S')
 			username = req["username"]
 			if phone !="":
