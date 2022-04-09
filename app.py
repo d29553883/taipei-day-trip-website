@@ -20,7 +20,7 @@ app.secret_key="asdgewrwjghjyrirjj"
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="123456",
+  password="",
   database="website",
 )
 mycursor = mydb.cursor()
@@ -506,8 +506,8 @@ def thankyouPage(orderNumber):
 
 
 
-# app.run(host='0.0.0.0',port=3000)
-app.run(port=3000,debug=true)
+app.run(host='0.0.0.0',port=3000)
+# app.run(port=3000,debug=true)
 
 
 
