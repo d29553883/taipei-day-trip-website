@@ -17,3 +17,22 @@ function thankyouPage() {
 }
 
 thankyouPage();
+
+document
+  .getElementById("reservation_button")
+  .addEventListener("click", function () {
+    fetch("/api/user")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((result) => {
+        let data = result.data;
+        console.log(data);
+        if (data !== null) {
+          location.assign("/booking");
+        } else {
+          document.querySelector(".popup").style.display = "flex";
+          stop();
+        }
+      });
+  });

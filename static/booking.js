@@ -121,6 +121,32 @@ document.getElementById("delete").addEventListener("click", function () {
     });
 });
 
+function deleteBook() {
+  fetch("/api/booking", {
+    method: "DELETE",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then((result) => {
+      if (result.ok === true) {
+        document.getElementById("warp").innerHTML = "";
+        let stout = document.getElementById("stout");
+        let nobook = document.createElement("div");
+        nobook.id = "nobook";
+        let nobooktext = document.createTextNode("目前沒有任何代預定的行程");
+        let extendout = document.createElement("div");
+        extendout.className = "extendout";
+        let extend = document.createElement("div");
+        extend.id = "extend";
+        extendout.appendChild(extend);
+        document.getElementById("extendout").style.display = "flex";
+        nobook.appendChild(nobooktext);
+        stout.appendChild(nobook);
+      }
+    });
+}
+
 TPDirect.setupSDK(
   123992,
   "app_XpdqJEzCUtW3DqRCgzOrLSNfYRFz3ae3Zu6pxTdyp1qWYKOqWbuvN1lU4VFz",
@@ -270,6 +296,7 @@ function onSubmit(event) {
             if (res.data.payment.status === 0) {
               let orderNumber = res.data.number;
               location.assign("/thankyou?number=" + orderNumber);
+              deleteBook();
             } else {
               document.getElementById("checkinfoBox").innerHTML = "";
               let checkinfoBox = document.getElementById("checkinfoBox");
