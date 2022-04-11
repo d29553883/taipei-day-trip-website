@@ -61,6 +61,52 @@ header {
   margin: auto;
   flex-wrap: wrap
 }
+#booktitlebox{
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  width: 100%;
+  height: 250px;
+  margin: auto;
+  flex-direction:column ;
+}
+#booktitle{
+  display: flex;
+  width:300px;
+  max-width: 1200px;
+  margin-top: 50px;
+  align-items: center;
+  height:60px;
+  font-size: 19px;
+  font-weight: bold;
+  flex-direction:column ;
+  color: #666666; 
+}
+#booktitle a {
+  display: flex;
+}
+#remindnumber{
+  display: flex;
+  width:600px;
+  max-width: 1200px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+  height:60px;
+  font-size: 19px;
+  flex-direction:column ;
+  color: #666666;  
+}
+#numberBox{
+  display: flex;
+  width:300px;
+  max-width: 1200px;
+  margin-top: 30px;
+  justify-content: center;
+  height:60px;
+  font-size: 19px;
+  color: #666666;   
+}
 #nobook{
   display: flex;
   margin-bottom: 40px ;
@@ -201,7 +247,7 @@ header {
   display: flex;
   font-weight: bold;
   height: 16px;
-  margin-bottom: 9px;
+  margin-bottom: 14px;
 }
 input {
   width: 180px;
@@ -211,12 +257,25 @@ input {
   padding: 10px;
   border: 1px solid #e8e8e8;
 }
-/* #name {
 
+.tpfield {
+  height: 18px;
+  width: 180px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-left: 5px;
+  border: 1px solid #e8e8e8;
+  padding: 10px;
 }
-#email {
+label{
+  display: flex;
 }
-*/
+.form-group{
+  display: flex;
+  align-items: center;
+}
+
+
 #remind {
   font-weight: bold;
   margin-top: 20px;
@@ -248,6 +307,23 @@ input {
   margin: auto;
   margin-bottom: 43px;
 }
+#checkinfoBox{
+  display: flex;
+  justify-content: end;
+  max-width: 1000px;
+  width: 100%;
+  height: 43px;
+  margin: auto;
+}
+#checkinfo {
+  display: flex;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  height: 14px;
+  font-weight: bold;
+  color: #e50000;
+}
 #confirm {
   display: flex;
   align-items: flex-end;
@@ -257,6 +333,7 @@ input {
   margin: auto;
   flex-direction: column;
 }
+
 #totalcost {
   display: flex;
   font-size: 16px;
@@ -298,14 +375,26 @@ footer {
 #extendout{
   display: none;
   width: 100%;
-  height:61vh ;
+  height:70.1vh ;
   max-height: 100%;
 }
 #extend{
   display: flex;
   width: 100%;
   background-color: #757575;
-  height:61vh;
+  height:70.1vh;
+}
+#extendout2{
+  display: flex;
+  width: 100%;
+  height:56.1vh ;
+  max-height: 100%;
+}
+#extend2{
+  display: flex;
+  width: 100%;
+  background-color: #757575;
+  height:56.1vh;
 }
 .successlogin {
   display: flex;
@@ -459,7 +548,24 @@ footer {
   cursor: pointer;
 }
 
+.tappay-field-focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.has-error .tappay-field-focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+.has-success .tappay-field-focus {
+  border-color: #2b542c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+}
 
+  
 @media screen and (max-width: 1200px){
 
   #section1 {
