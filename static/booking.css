@@ -9,6 +9,8 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  border-bottom: 0.5px solid #e8e8e8;
+
 }
 header {
   display: flex;
@@ -356,6 +358,11 @@ label{
   background-color: #448899;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.4s;
+  opacity: 1;
+}
+#confirmBtn:hover{
+  opacity: 0.7;
 }
 #confirmBtntext {
   display: flex;
@@ -495,6 +502,11 @@ footer {
   cursor: pointer;
   color: #ffffff;
   text-decoration: none;
+  transition: 0.4s;
+  opacity: 1;
+}
+.login_text:hover{
+  opacity: 0.7;
 }
 .close {
   width: 16px;

@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  border-bottom: 0.5px solid #e8e8e8;
 }
 header {
   display: flex;
@@ -39,6 +40,7 @@ input {
   width: 400px;
   height: 42px;
   border-radius: 5px 0 0 5px;
+  padding-left: 13px;
 }
 a {
   text-decoration: none;
@@ -154,6 +156,11 @@ a {
   color: #ffffff;
   text-decoration: none;
   font-size: 19px;
+  transition: 0.4s;
+  opacity: 1;
+}
+.login_text:hover{
+  opacity: 0.7;
 }
 .close {
   width: 16px;
@@ -302,17 +309,29 @@ a {
   position: relative;
   border-radius: 2px;
   outline: 1px solid #e8e8e8;
+  transition: 0.4s;
+  opacity: 1;
+}
+.item:hover{
+  opacity: 0.7;
 }
 .p_container {
   flex: none;
   width: 270px;
   object-fit: fill;
   position: relative;
+  overflow: hidden;
+  transition: 0.5s;
 }
 .item img {
   width: 270px;
-  object-fit: cover;
+  transition: all 0.2s;
 }
+.item img:hover{
+  transform: scale(1.2);  
+}
+
+
 .name_container {
   width: 100%;
   height: 40px;
@@ -361,7 +380,12 @@ a {
 .btn2 {
   display: flex;
   background: none;
-  margin-top: 1px;
+  cursor: pointer;
+  transition: 0.4s;
+  opacity: 1;
+}
+.btn2:hover{
+  opacity: 0.7;
 }
 
 .error {
@@ -472,6 +496,7 @@ footer {
     /* -webkit-border-radius: 15px 10px; */
     border-radius: 5px 0 0 5px;
   }
+
   .item {
     width: 90%;
     height: 280px;
