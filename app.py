@@ -5,9 +5,13 @@ import decimal
 import ast
 import json
 import requests
+from cnxpool import cnxpool
 from datetime import datetime 
-
 from sqlalchemy import true
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app=Flask(__name__)
 CORS(app)
@@ -17,13 +21,8 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.secret_key="asdgewrwjghjyrirjj"
 
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="",
-  database="website",
-)
-mycursor = mydb.cursor()
+# mydb = mysql.connector.connect()
+# mycursor = mydb.cursor()
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -45,100 +44,115 @@ def thankyou():
 	return render_template("thankyou.html")
 
 @app.route("/api/attractions")
-def api_1():
-	page = request.args.get("page")
-	keyword = request.args.get("keyword")
-	if page != '' and keyword == None:	
-		page = int(page)
-		page_index = page*12
-		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions ORDER BY id LIMIT %s, %s"
-		adr = (page_index,12)		
-		mycursor.execute(sql, adr)
-		myresult = mycursor.fetchall()
-		names = 'id name category description address transport mrt latitude longitude images'.split()
-		data = [{name:value for name, value in zip(names, mr)} for mr in myresult]
-		data = json.dumps(data, cls=DecimalEncoder, ensure_ascii=False)
-		data = ast.literal_eval(data)
-		c = len(data)
-		if c <12:
-			nextPage = "null"
-		else:
-			nextPage = page+1	
-		for i in data:
-			i["images"] = ast.literal_eval(i["images"])
-		y = {
-			"nextPage":nextPage,
-			"data":data
-		}
-		return jsonify(y)
-	elif page != '' and keyword != None:
-		page = int(page)
-		page_index = page*12
-		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
-		adr = ('%'+keyword+'%',page_index,12)
-		nextPage = page+1
-		mycursor.execute(sql,adr)
-		myresult = mycursor.fetchall()
-
-		names = 'id name category description address transport mrt latitude longitude images'.split()
-		data = [{name:value for name, value in zip(names, mr)} for mr in myresult]
-		data = json.dumps(data, cls=DecimalEncoder, ensure_ascii=False)
-		data = ast.literal_eval(data)
-		c = len(data)
-		if c <12:
-			nextPage = "null"
-		else:
+def attractions():
+	try:
+		cnx=cnxpool.get_connection()
+		mycursor=cnx.cursor() 
+		page = request.args.get("page")
+		keyword = request.args.get("keyword")
+		if page != '' and keyword == None:	
+			page = int(page)
+			page_index = page*12
+			sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions ORDER BY id LIMIT %s, %s"
+			adr = (page_index,12)		
+			mycursor.execute(sql, adr)
+			myresult = mycursor.fetchall()
+			names = 'id name category description address transport mrt latitude longitude images'.split()
+			data = [{name:value for name, value in zip(names, mr)} for mr in myresult]
+			data = json.dumps(data, cls=DecimalEncoder, ensure_ascii=False)
+			data = ast.literal_eval(data)
+			c = len(data)
+			if c <12:
+				nextPage = "null"
+			else:
+				nextPage = page+1	
+			for i in data:
+				i["images"] = ast.literal_eval(i["images"])
+			y = {
+				"nextPage":nextPage,
+				"data":data
+			}
+			return jsonify(y)
+		elif page != '' and keyword != None:
+			page = int(page)
+			page_index = page*12
+			sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s, %s "
+			adr = ('%'+keyword+'%',page_index,12)
 			nextPage = page+1
-		for i in data:
-			i["images"] = ast.literal_eval(i["images"])
-		y = {
-			"nextPage":nextPage,
-			"data":data
-		}
-		return jsonify(y)
-	else:
-		a = 1
-		x = {
-			"error": bool(a),
-			"message":"page沒輸入"
-		}
-		return jsonify(x)
+			mycursor.execute(sql,adr)
+			myresult = mycursor.fetchall()
+			names = 'id name category description address transport mrt latitude longitude images'.split()
+			data = [{name:value for name, value in zip(names, mr)} for mr in myresult]
+			data = json.dumps(data, cls=DecimalEncoder, ensure_ascii=False)
+			data = ast.literal_eval(data)
+			c = len(data)
+			if c <12:
+				nextPage = "null"
+			else:
+				nextPage = page+1
+			for i in data:
+				i["images"] = ast.literal_eval(i["images"])
+			y = {
+				"nextPage":nextPage,
+				"data":data
+			}
+			return jsonify(y)
+		else:
+			a = 1
+			x = {
+				"error": bool(a),
+				"message":"page沒輸入"
+			}
+			return jsonify(x)
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()		
+
+
 
 @app.route("/api/attraction/<attractionId>")
 def searchid(attractionId):
-	sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE id = %s"
-	i = int(attractionId)
-	adr = (i,)
-	mycursor.execute(sql,adr)
-	myresult = mycursor.fetchall()
+	try:
+		cnx=cnxpool.get_connection()
+		mycursor=cnx.cursor() 
+		sql = "SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM attractions WHERE id = %s"
+		i = int(attractionId)
+		adr = (i,)
+		mycursor.execute(sql,adr)
+		myresult = mycursor.fetchall()
 
-	if myresult != []:
-		ml = list(myresult[0])
-		ml = json.dumps(ml, cls=DecimalEncoder, ensure_ascii=False)
-		ml = ast.literal_eval(ml)
-		ml[9] = ast.literal_eval(ml[9])
-		x = {
-			"data":{
-				"id":ml[0],
-				"name":ml[1],
-				"category":ml[2],
-				"description":ml[3],
-				"address":ml[4],
-				"transport":ml[5],
-				"mrt":ml[6],
-				"latitude":ml[7],
-				"longitude":ml[8],
-				"images":ml[9]
+		if myresult != []:
+			ml = list(myresult[0])
+			ml = json.dumps(ml, cls=DecimalEncoder, ensure_ascii=False)
+			ml = ast.literal_eval(ml)
+			ml[9] = ast.literal_eval(ml[9])
+			x = {
+				"data":{
+					"id":ml[0],
+					"name":ml[1],
+					"category":ml[2],
+					"description":ml[3],
+					"address":ml[4],
+					"transport":ml[5],
+					"mrt":ml[6],
+					"latitude":ml[7],
+					"longitude":ml[8],
+					"images":ml[9]
+				}
 			}
-		}
-		return jsonify(x)
-	else:
-		a = 1
-		x = {
-			"error": bool(a),
-			"message":"景點編號不正確"
-		}
-		return jsonify(x)
+			return jsonify(x)
+		else:
+			a = 1
+			x = {
+				"error": bool(a),
+				"message":"景點編號不正確"
+			}
+			return jsonify(x)
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()	
 
 
 
@@ -163,6 +177,8 @@ def memberinfo():
 @app.route("/api/user", methods=["POST"])
 def signup():
 	try:
+		cnx=cnxpool.get_connection()
+		mycursor=cnx.cursor() 
 		req = request.get_json()
 		e_mail = req["email"]
 		sql = "SELECT email FROM member2 WHERE email = %s"
@@ -174,15 +190,13 @@ def signup():
 				"error": True,
 				"message": "此email已存在"
 			}),400)
-
 			return response
-
 		else:
 			Name = req["name"]
 			e_mail = req["email"]
 			passWord = req["password"]
 			mycursor.execute("INSERT INTO member2(name, email, password) VALUES(%s, %s, %s)",(Name, e_mail, passWord))
-			mydb.commit()
+			cnx.commit()
 			return jsonify({
 				"ok": True
 			})
@@ -191,11 +205,17 @@ def signup():
 			"error": True,
 			"message": "伺服器崩潰"
 		}),500
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()		
 
 		
 @app.route("/api/user", methods=["PATCH"])
 def signin():
 	try:
+		cnx=cnxpool.get_connection()
+		mycursor=cnx.cursor()
 		req = request.get_json()
 		e_mail = req["email"]
 		passWord = req["password"]
@@ -226,6 +246,10 @@ def signin():
 			"error": True,
 			"message": "伺服器內部錯誤"
 		}),500
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()
 
 
 
@@ -238,52 +262,60 @@ def signout():
 
 @app.route("/api/booking")
 def bookinfo():
-	if "e_mail" in session :
-		email = session["e_mail"]
-		sql2 = "SELECT attractionid,name,address,image,date,time,price,email FROM attractions2 WHERE email = %s"
-		adr2 = (email,)
-		mycursor.execute(sql2, adr2)
-		myresult = mycursor.fetchall()
-		if myresult != []:
-			x = myresult[0]
-			x.__str__()
-			attractionId = x[0]
-			name = x[1]
-			address = x[2]
-			image = x[3]
-			date = x[4]
-			time = x[5]
-			price = x[6]
-			email = x[7]
-			return jsonify({
-				"data": {
-					"attraction": {
-					"attractionid": attractionId,
-					"name":name,
-					"address":address,
-					"image" :image
-					},
-					"date":date,
-					"time":time,
-					"price":price		
-				}
-			})
+	try:
+		if "e_mail" in session :
+			cnx=cnxpool.get_connection()
+			mycursor=cnx.cursor()
+			email = session["e_mail"]
+			sql2 = "SELECT attractionid,name,address,image,date,time,price,email FROM attractions2 WHERE email = %s"
+			adr2 = (email,)
+			mycursor.execute(sql2, adr2)
+			myresult = mycursor.fetchall()
+			if myresult != []:
+				x = myresult[0]
+				x.__str__()
+				attractionId = x[0]
+				name = x[1]
+				address = x[2]
+				image = x[3]
+				date = x[4]
+				time = x[5]
+				price = x[6]
+				email = x[7]
+				return jsonify({
+					"data": {
+						"attraction": {
+						"attractionid": attractionId,
+						"name":name,
+						"address":address,
+						"image" :image
+						},
+						"date":date,
+						"time":time,
+						"price":price		
+					}
+				})
+			else:
+				return jsonify({
+					"data":None
+				})
 		else:
 			return jsonify({
-				"data":None
-			})
-
-	else:
-		return jsonify({
-			"error": True,
-			"message": "未登入系統，拒絕存取"
-		}),403
+				"error": True,
+				"message": "未登入系統，拒絕存取"
+			}),403
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()	
 
 
 @app.route("/api/booking",methods=["POST"])
 def createinfo():
 	try :
 		if "e_mail" in session :
+			cnx=cnxpool.get_connection()
+			mycursor=cnx.cursor()
 			req = request.get_json()
 			price = req["price"]
 			priceslice = int(price[-5:-1])
@@ -313,7 +345,7 @@ def createinfo():
 				"`attractionid`=VALUES(`attractionid`),`name`=VALUES(`name`),`address`=VALUES(`address`),`image`=VALUES(`image`),`date`=VALUES(`date`),`time`=VALUES(`time`),`price`=VALUES(`price`),`email`=VALUES(`email`)")		
 				adr = (attractionId,name,address,image,date,time,price,email)
 				mycursor.execute(sql,adr)
-				mydb.commit()			
+				cnx.commit()			
 				return jsonify({
 					"attractionId":attractionId,
 					"date": date,
@@ -335,31 +367,44 @@ def createinfo():
 			"error": True,
 			"message": "伺服器內部錯誤"
 		}),500		
-
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()
 
 
 @app.route("/api/booking", methods=["DELETE"])
 def deleteBook():
-	if session != {}:
-		email = session["e_mail"]
-		sql3 = "DELETE FROM attractions2 where email = %s"
-		adr3 = (email,)
-		mycursor.execute(sql3, adr3)
-		mydb.commit()
-		return jsonify({
-			"ok": True
-		})
-	else:
-		return jsonify({
-			"error": True,
-			"message": "未登入系統，拒絕存取"
-		}),403		
+	try:
+		if session != {}:
+			cnx=cnxpool.get_connection()
+			mycursor=cnx.cursor()			
+			email = session["e_mail"]
+			sql3 = "DELETE FROM attractions2 where email = %s"
+			adr3 = (email,)
+			mycursor.execute(sql3, adr3)
+			cnx.commit()
+			return jsonify({
+				"ok": True
+			})
+		else:
+			return jsonify({
+				"error": True,
+				"message": "未登入系統，拒絕存取"
+			}),403
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()			
 
 
 @app.route("/api/orders",methods=["POST"])
 def createBook():
 	try:
 		if session != {}:
+			cnx=cnxpool.get_connection()
+			mycursor=cnx.cursor()			
+			partnerKey = os.getenv("PARTNERKEY")
 			req = request.get_json()
 			prime = req["prime"]
 			email = req["email"]
@@ -382,11 +427,11 @@ def createBook():
 			if phone !="":
 				header = {
 					"content-type": "application/json",
-					"x-api-key": "partner_a1lm2ABCXvfZdmHL38B5YDgD0y7BFWXkILh3AY2rzHpbSWMBl9XFMyGZ"
+					"x-api-key": partnerKey
 				}
 				my_data = {
 						"prime": prime,
-						"partner_key": "partner_a1lm2ABCXvfZdmHL38B5YDgD0y7BFWXkILh3AY2rzHpbSWMBl9XFMyGZ",
+						"partner_key": partnerKey,
 						"merchant_id": "d29553883_CTBC",
 						"details":"TapPay Test",
 						"amount": price,
@@ -399,14 +444,13 @@ def createBook():
 					}
 				response = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', json = my_data, headers=header)
 				data = response.json()
-				print(data)
 				status = data["status"]
 				if status == 0:
 					sql2 = ("INSERT INTO booking(number,price,attractionid,name,address,image,date,time,username,email,phone,status)" 
 					" VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")		
 					adr2 = (number,price,attractionid,name,address,image,date,time,username,email,phone,status)
 					mycursor.execute(sql2,adr2)
-					mydb.commit()
+					cnx.commit()
 					return jsonify({
 						"data": {
 							"number": number,
@@ -421,7 +465,7 @@ def createBook():
 					" VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")		
 					adr2 = (number,price,attractionid,name,address,image,date,time,username,email,phone,status)
 					mycursor.execute(sql2,adr2)
-					mydb.commit()
+					cnx.commit()
 					return jsonify({
 						"data": {
 							"number": number,
@@ -446,59 +490,67 @@ def createBook():
 			"error": True,
 			"message": "伺服器內部錯誤"
 		}),500	
-
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()
 
 
 @app.route("/api/orders/<orderNumber>")
 def thankyouPage(orderNumber):
-	if session != {}:
-		print(orderNumber)
-		sql = "SELECT number,price,attractionid,name,address,image,date,time,username,email,phone,status FROM booking WHERE number = %s" 
-		adr = (orderNumber,)
-		mycursor.execute(sql, adr)
-		myresult = mycursor.fetchall()
-		print(myresult)
-		x = myresult[0]
-		x.__str__()
-		number = x[0]
-		price = x[1]
-		attractionId = x[2]
-		name = x[3]
-		address = x[4]
-		image = x[5]
-		date = x[6]
-		time = x[7]
-		username = x[8]
-		email = x[9]
-		phone = x[10]
-		status = x[11]
-		return jsonify({
-						"data": {
-				"number": number,
-				"price": price,
-				"trip": {
-					"attraction": {
-						"id": attractionId,
-						"name": name,
-						"address": address,
-						"image": image
-					},
-					"date": date,
-					"time": time
-				},
-				"contact": {
-					"name": username,
-					"email": email,
-					"phone": phone
-				},
-				"status": status
-			}			
-		})
-	else:
+	try:
+		if session != {}:
+			cnx=cnxpool.get_connection()
+			mycursor=cnx.cursor()
+			sql = "SELECT number,price,attractionid,name,address,image,date,time,username,email,phone,status FROM booking WHERE number = %s" 
+			adr = (orderNumber,)
+			mycursor.execute(sql, adr)
+			myresult = mycursor.fetchall()
+			x = myresult[0]
+			x.__str__()
+			number = x[0]
+			price = x[1]
+			attractionId = x[2]
+			name = x[3]
+			address = x[4]
+			image = x[5]
+			date = x[6]
+			time = x[7]
+			username = x[8]
+			email = x[9]
+			phone = x[10]
+			status = x[11]
 			return jsonify({
-				"error": True,
-				"message": "未登入系統，拒絕存取"
-			}),403		
+							"data": {
+					"number": number,
+					"price": price,
+					"trip": {
+						"attraction": {
+							"id": attractionId,
+							"name": name,
+							"address": address,
+							"image": image
+						},
+						"date": date,
+						"time": time
+					},
+					"contact": {
+						"name": username,
+						"email": email,
+						"phone": phone
+					},
+					"status": status
+				}			
+			})
+		else:
+				return jsonify({
+					"error": True,
+					"message": "未登入系統，拒絕存取"
+				}),403
+	finally:
+		if cnx.in_transaction:
+			cnx.rollback()
+		cnx.close()						
 		
 
 

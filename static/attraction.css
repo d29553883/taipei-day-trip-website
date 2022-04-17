@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  border-bottom: 0.5px solid #e8e8e8;
 }
 header {
   display: flex;
@@ -135,6 +136,13 @@ header {
   height: 35px;
   font-size: 16px;
   margin-left: 7px;
+  cursor: pointer;
+  transition: 0.4s;
+  opacity: 1;
+}
+#date:hover{
+  opacity: 0.7;
+  background-color: #939393;
 }
 .title {
   font-weight: bold;
@@ -222,6 +230,11 @@ header {
   background-color: #448899;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.4s;
+  opacity: 1;
+}
+#bookBtn:hover{
+  opacity: 0.7;
 }
 #bookBtntext {
   margin-bottom: 3px;
@@ -463,6 +476,11 @@ footer {
   cursor: pointer;
   color: #ffffff;
   text-decoration: none;
+  transition: 0.4s;
+  opacity: 1;
+}
+.login_text:hover{
+  opacity: 0.7;
 }
 .close {
   width: 16px;
