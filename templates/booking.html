@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href={{ url_for('static', filename='booking.css')
-    }}/>
+    <title>Booking Page</title>
+    <link
+      href="../static/css/booking.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
   </head>
   <body>
     <div class="wrapper">
@@ -25,7 +29,7 @@
           <div class="top-line"></div>
           <div class="popup-title">
             登入會員帳號
-            <img src="../static/icon_close.svg" alt="Close" class="close" />
+            <img src="../static/pic/icon_close.svg" alt="Close" class="close" />
           </div>
           <form>
             <input
@@ -59,7 +63,11 @@
           <div class="top-line"></div>
           <div class="popup-title">
             註冊會員帳號
-            <img src="../static/icon_close.svg" alt="Close" class="close2" />
+            <img
+              src="../static/pic/icon_close.svg"
+              alt="Close"
+              class="close2"
+            />
           </div>
           <form>
             <input
@@ -104,7 +112,7 @@
             <div id="s1_text_out">
               <div id="attraction"></div>
               <div id="delete" type="button">
-                <img src="../static/icon_delete.svg" />
+                <img src="../static/pic/icon_delete.svg" />
               </div>
               <div id="date"><a>日期 : </a></div>
               <div id="time"><a>時間 : </a></div>
@@ -180,7 +188,7 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript" src="../static/booking.js"></script>
-    <script type="text/javascript" src="../static/member.js"></script>
+    <script type="text/javascript" src="../static/js/booking.js"></script>
+    <script type="text/javascript" src="../static/js/member.js"></script>
   </body>
 </html>
