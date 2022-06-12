@@ -1,6 +1,6 @@
 from flask import *
 from flask_cors import CORS
-import mysql.connector
+# import mysql.connector
 import decimal
 import ast
 import json
@@ -558,8 +558,8 @@ def thankyouPage(orderNumber):
 
 
 
-# app.run(host='0.0.0.0',port=3000)
-app.run(port=3000,debug=true)
+app.run(host='0.0.0.0',port=3000)
+# app.run(port=3000,debug=true)
 
 
 
