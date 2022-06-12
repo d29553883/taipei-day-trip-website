@@ -1,4 +1,4 @@
-import mysql.connector.pooling
+from mysql.connector import pooling
 import os
 from dotenv import load_dotenv
 
@@ -14,7 +14,7 @@ dbconfig={
     "auth_plugin" : "mysql_native_password"
 }
 
-cnxpool=mysql.connector.pooling.MySQLConnectionPool(
+cnxpool=pooling.MySQLConnectionPool(
     pool_name = "mypool",
     pool_size = 20,
     **dbconfig

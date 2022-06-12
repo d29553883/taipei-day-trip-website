@@ -1,6 +1,6 @@
 from flask import *
 from flask_cors import CORS
-import mysql.connector
+# import mysql.connector
 import decimal
 import ast
 import json
@@ -344,7 +344,8 @@ def createinfo():
 				" VALUES(%s,%s,%s,%s,%s,%s,%s,%s) ON duplicate KEY UPDATE" 
 				"`attractionid`=VALUES(`attractionid`),`name`=VALUES(`name`),`address`=VALUES(`address`),`image`=VALUES(`image`),`date`=VALUES(`date`),`time`=VALUES(`time`),`price`=VALUES(`price`),`email`=VALUES(`email`)")		
 				adr = (attractionId,name,address,image,date,time,price,email)
-				mycursor.execute(sql,adr)
+				
+				
 				cnx.commit()			
 				return jsonify({
 					"attractionId":attractionId,
@@ -557,8 +558,8 @@ def thankyouPage(orderNumber):
 
 
 
-app.run(host='0.0.0.0',port=3000)
-# app.run(port=3000,debug=true)
+# app.run(host='0.0.0.0',port=3000)
+app.run(port=3000,debug=true)
 
 
 

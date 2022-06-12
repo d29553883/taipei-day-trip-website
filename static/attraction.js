@@ -183,7 +183,6 @@ document.getElementById("bookBtn").addEventListener("click", function () {
         }
       } else {
         document.querySelector(".popup").style.display = "flex";
-        stop();
       }
     });
 });
@@ -202,7 +201,6 @@ document
           location.assign("/booking");
         } else {
           document.querySelector(".popup").style.display = "flex";
-          stop();
         }
       });
   });
