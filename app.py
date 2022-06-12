@@ -1,6 +1,6 @@
 from flask import *
 from flask_cors import CORS
-# import mysql.connector
+import mysql.connector
 import decimal
 import ast
 import json
