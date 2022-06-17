@@ -74,6 +74,7 @@ function bookBefore() {
           bookImg.src = data.attraction.image;
           s1_pic_out.appendChild(bookImg);
         } else {
+          console.log(result);
           document.getElementById("warp").innerHTML = "";
           let stout = document.getElementById("stout");
           let nobook = document.createElement("div");
@@ -294,7 +295,7 @@ function onSubmit(event) {
           console.log(res);
           if (res.data !== "") {
             if (res.data.payment.status === 0) {
-              deleteBook();
+              // deleteBook();
               let orderNumber = res.data.number;
               location.assign("/thankyou?number=" + orderNumber);
             } else {

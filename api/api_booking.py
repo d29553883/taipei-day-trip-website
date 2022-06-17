@@ -8,10 +8,10 @@ api_booking=Blueprint("api_booking", __name__, template_folder="templates")
 
 @api_booking.route("/api/booking")
 def bookinfo():
+	cnx=cnxpool.get_connection()
+	mycursor=cnx.cursor()
 	try:
 		if "e_mail" in session :
-			cnx=cnxpool.get_connection()
-			mycursor=cnx.cursor()
 			email = session["e_mail"]
 			sql2 = "SELECT attractionid,name,address,image,date,time,price,email FROM attractions2 WHERE email = %s"
 			adr2 = (email,)
@@ -53,6 +53,7 @@ def bookinfo():
 	finally:
 		if cnx.in_transaction:
 			cnx.rollback()
+		mycursor.close()
 		cnx.close()	
 
 
@@ -89,10 +90,11 @@ def createinfo():
 				sql = ("INSERT INTO attractions2(attractionid,name,address,image,date,time,price,email)" 
 				" VALUES(%s,%s,%s,%s,%s,%s,%s,%s) ON duplicate KEY UPDATE" 
 				"`attractionid`=VALUES(`attractionid`),`name`=VALUES(`name`),`address`=VALUES(`address`),`image`=VALUES(`image`),`date`=VALUES(`date`),`time`=VALUES(`time`),`price`=VALUES(`price`),`email`=VALUES(`email`)")		
-				adr = (attractionId,name,address,image,date,time,price,email)
-				
-				
-				cnx.commit()			
+				adr = (attractionId,name,address,image,date,time,price,email)	
+				mycursor.execute(sql, adr)
+				cnx.commit()
+				print("預定成功")
+
 				return jsonify({
 					"attractionId":attractionId,
 					"date": date,
