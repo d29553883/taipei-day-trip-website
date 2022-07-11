@@ -1,10 +1,10 @@
 from flask import *
 from flask_cors import CORS
-from api.api_attractions import api_attractions
-from api.api_attraction_attractionId import api_attraction_attractionId
-from api.api_user import api_user
-from api.api_booking import api_booking
-from api.api_orders import api_orders
+from controller.api_attractions import api_attractions
+from controller.api_attraction_attractionId import api_attraction_attractionId
+from controller.api_user import api_user
+from controller.api_booking import api_booking
+from controller.api_orders import api_orders
 
 app=Flask(__name__)
 CORS(app)
