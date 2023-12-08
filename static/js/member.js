@@ -12,16 +12,13 @@ function siginin() {
   })
     .then((response) => response.json())
     .then((res) => {
-      console.log(res);
-      console.log(res);
-      console.log(res);
       if (res.ok === true) {
         let token = res.access_token;
         // 設置 cookie 過期時間為一小時後
         const expirationDate = new Date();
         expirationDate.setTime(expirationDate.getTime() + (60 * 60 * 1000)); // 一小時後 
-        document.cookie = `accessToken=${token}; path=/; expires=${expirationDate.toUTCString()}; secure; samesite=strict`;       
-        // location.reload();
+        document.cookie = `accessToken=${token}; path=/; expires=${expirationDate.toUTCString()}; samesite=strict`;       
+        location.reload();
       } else if (res.message === "帳號或密碼錯誤") {
         let loginerror = document.getElementsByClassName("loginerror")[0];
         loginerror.innerHTML = "";
