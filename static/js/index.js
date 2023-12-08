@@ -297,9 +297,9 @@ function memberstatus() {
       }      
     })
       .then((response) => response.json())
-      .then((res) => { 
+      .then((res) => {
+        console.log(res);
         if (res.data !== null) {
-          console.log(token);
           document.getElementById("logout_button").style.display = "flex";
           document.getElementById("login_button").style.display = "none";
         } else {
@@ -310,6 +310,7 @@ function memberstatus() {
   } else{
     // 如果沒有 token，可能需要執行其他操作或者提示用戶登錄
     console.log("Token not found");
+    document.cookie = "jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     // 可以在這裡顯示登錄按鈕等等
     document.getElementById("logout_button").style.display = "none";
     document.getElementById("login_button").style.display = "flex";    

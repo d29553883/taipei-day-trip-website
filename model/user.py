@@ -6,7 +6,6 @@ from flask_jwt_extended import unset_jwt_cookies
 class UserModel:
   def memberinfo(self):
     print("ok")
-    # authorization_header = request.headers.get('Authorization')
     if session != {}:
       return jsonify({
         "data":{

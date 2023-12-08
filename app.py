@@ -39,8 +39,12 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-
-
+@jwt.expired_token_loader
+def expired_token_callback():
+    return jsonify({
+        'code': 201,
+        'message': "Token expired"
+    }), 401
 
 app.run(host='0.0.0.0',port=3000)
 
