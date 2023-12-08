@@ -288,20 +288,34 @@ function searchdata() {
 }
 
 function memberstatus() {
-  fetch("/api/user", {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data !== null) {
-        document.getElementById("logout_button").style.display = "flex";
-        document.getElementById("login_button").style.display = "none";
-      } else {
-        document.getElementById("logout_button").style.display = "none";
-        document.getElementById("login_button").style.display = "flex";
-      }
-    });
-}
+  const token = getAccessToken();
+  if (token){
+    fetch("/api/user", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}` // 在 headers 中加入 Authorization 欄位
+      }      
+    })
+      .then((response) => response.json())
+      .then((res) => { 
+        if (res.data !== null) {
+          console.log(token);
+          document.getElementById("logout_button").style.display = "flex";
+          document.getElementById("login_button").style.display = "none";
+        } else {
+          document.getElementById("logout_button").style.display = "none";
+          document.getElementById("login_button").style.display = "flex";
+        }
+      });
+  } else{
+    // 如果沒有 token，可能需要執行其他操作或者提示用戶登錄
+    console.log("Token not found");
+    // 可以在這裡顯示登錄按鈕等等
+    document.getElementById("logout_button").style.display = "none";
+    document.getElementById("login_button").style.display = "flex";    
+  }
+  }
+
 memberstatus();
 
 function createinfo() {
@@ -340,18 +354,40 @@ searchBtn.addEventListener("click", function () {
 document
   .getElementById("reservation_button")
   .addEventListener("click", function () {
-    fetch("/api/user")
-      .then(function (response) {
-        return response.json();
-      })
-      .then((result) => {
-        let data = result.data;
-        console.log(data);
-        if (data !== null) {
-          location.assign("/booking");
-        } else {
-          document.querySelector(".popup").style.display = "flex";
-          stop();
-        }
-      });
+    const token = getAccessToken();
+    if (token){
+      fetch("/api/user", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}` // 在 headers 中加入 Authorization 欄位
+        }      
+      })      
+        .then(function (response) {
+          return response.json();
+        })
+        .then((result) => {
+          let data = result.data;
+          console.log(data);
+          if (data !== null) {
+            location.assign("/booking");
+          } else {
+            document.querySelector(".popup").style.display = "flex";
+            stop();
+          }
+        });
+      }else{
+        document.querySelector(".popup").style.display = "flex";
+        stop();        
+      }
   });
+
+function getAccessToken() {
+  const cookies = document.cookie.split(';'); // 將所有 cookie 分割成陣列
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim(); // 移除空格
+    if (cookie.startsWith('accessToken=')) {
+      return cookie.split('=')[1]; // 返回 'accessToken' 的值
+    }
+  }
+  return null; // 如果未找到則返回 null
+};

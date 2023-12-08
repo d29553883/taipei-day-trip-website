@@ -1,9 +1,10 @@
 from flask import *
 from model.user import user_model
-
+from flask_jwt_extended import jwt_required
 api_user=Blueprint("api_user", __name__, template_folder="templates")
 
 @api_user.route("/api/user")
+@jwt_required()
 def memberinfo():
 	get_result = user_model.memberinfo()
 	return get_result	

@@ -1,9 +1,12 @@
 from flask import *
 from cnxpool import cnxpool
-
-
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import unset_jwt_cookies
 class UserModel:
   def memberinfo(self):
+    print("ok")
+    # authorization_header = request.headers.get('Authorization')
     if session != {}:
       return jsonify({
         "data":{
@@ -75,9 +78,11 @@ class UserModel:
         session['id']= int(x[0])
         session["name"]= x[1]
         session["e_mail"]= x[2]
-        return jsonify({
-          "ok": True
-        })
+        access_token = create_access_token(identity=x[2])
+        return {
+          "ok": True,
+          "access_token":access_token,
+        }
       else:
         return jsonify({
           "error": True,
@@ -96,6 +101,8 @@ class UserModel:
 
   def signout(self):
     session.clear()
+    response = jsonify({'msg': 'Logout successful'})
+    return response    
     return jsonify({
       "ok": True
     })

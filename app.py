@@ -5,12 +5,19 @@ from controller.api_attraction_attractionId import api_attraction_attractionId
 from controller.api_user import api_user
 from controller.api_booking import api_booking
 from controller.api_orders import api_orders
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 
 app=Flask(__name__)
 CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config["JWT_SECRET_KEY"] = "super-secret-5iugfd4rs"
 app.secret_key="asdgewrwjghjyrirjj"
+jwt = JWTManager(app)
 
 app.register_blueprint(api_attractions)
 app.register_blueprint(api_attraction_attractionId)
@@ -32,6 +39,15 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+@app.route("/login", methods=["POST"])
+def login():
+		username = request.json.get("username", None)
+		password = request.json.get("password", None)
+		print(username)
+		print(password)
+
+		access_token = create_access_token(identity=username)
+		return jsonify(access_token=access_token)
 
 
 

@@ -13,6 +13,11 @@ function siginin() {
     .then((response) => response.json())
     .then((res) => {
       if (res.ok === true) {
+        let token = res.access_token;
+        // 設置 cookie 過期時間為一小時後
+        const expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (60 * 60 * 1000)); // 一小時後 
+        document.cookie = `accessToken=${token}; path=/; expires=${expirationDate.toUTCString()}; secure; samesite=strict`;       
         location.reload();
       } else if (res.message === "帳號或密碼錯誤") {
         let loginerror = document.getElementsByClassName("loginerror")[0];
@@ -54,11 +59,13 @@ function singup() {
 
 function logout() {
   fetch("/api/user", {
-    method: "DELETE",
+    method: "DELETE",    
   })
     .then((response) => response.json())
     .then((res) => {
-      if (res.ok === true) {
+      console.log(res);
+      if (res.msg === "Logout successful") {
+        document.cookie = "jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         location.reload();
       }
     });
