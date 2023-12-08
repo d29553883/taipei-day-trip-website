@@ -289,6 +289,7 @@ function searchdata() {
 
 function memberstatus() {
   const token = getAccessToken();
+  console.log(token);
   if (token){
     fetch("/api/user", {
       method: "GET",
