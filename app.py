@@ -39,15 +39,6 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-@app.route("/login", methods=["POST"])
-def login():
-		username = request.json.get("username", None)
-		password = request.json.get("password", None)
-		print(username)
-		print(password)
-
-		access_token = create_access_token(identity=username)
-		return jsonify(access_token=access_token)
 
 
 
