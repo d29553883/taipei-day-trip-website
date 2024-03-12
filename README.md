@@ -3,7 +3,7 @@ It's a website project of arranging 1 day trip in Taipei.
 
 ## Demo
 
-Here's the website : http://54.173.35.252:3000/
+Here's the website : http://3.220.149.47:3000/
 
 | Account | Password |
 | :----:| :----: | 
